@@ -9,12 +9,11 @@ import ImportRecipeModal from './components/ImportRecipeModal';
 import MyRecipes from './components/MyRecipes';
 
 const App: React.FC = () => {
-  const [currentUser, setCurrentUser] = useLocalStorage<string>('currentUser', 'User A');
   const [view, setView] = useState<'lists' | 'recipes'>('lists');
 
-  const [inHouseItems, setInHouseItems] = useLocalStorage<GroceryItem[]>(`${currentUser}-inHouseItems`, []);
-  const [shoppingListItems, setShoppingListItems] = useLocalStorage<GroceryItem[]>(`${currentUser}-shoppingListItems`, []);
-  const [savedRecipes, setSavedRecipes] = useLocalStorage<Recipe[]>(`${currentUser}-recipes`, []);
+  const [inHouseItems, setInHouseItems] = useLocalStorage<GroceryItem[]>('inHouseItems', []);
+  const [shoppingListItems, setShoppingListItems] = useLocalStorage<GroceryItem[]>('shoppingListItems', []);
+  const [savedRecipes, setSavedRecipes] = useLocalStorage<Recipe[]>('recipes', []);
 
   const [isImportModalOpen, setImportModalOpen] = useState(false);
 
@@ -142,8 +141,6 @@ const App: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <Header 
             onOpenImportModal={() => setImportModalOpen(true)} 
-            currentUser={currentUser}
-            onUserChange={setCurrentUser}
             view={view}
             onSetView={setView}
         />

@@ -1,3 +1,5 @@
+
+
 import React, { useState, useMemo } from 'react';
 import { GroceryItem, Category } from '../types';
 import { Check, Plus, GripVertical, ArrowUpDown, Trash2, X } from 'lucide-react';
@@ -28,8 +30,8 @@ const AddItemForm: React.FC<{ onAdd: (name: string, category: Category) => void;
         <form onSubmit={handleSubmit} className="space-y-3 p-3 bg-gray-50 rounded-lg border">
             <h3 className="font-semibold text-gray-700 text-lg">Add New Item</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Item name" className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 sm:col-span-2" autoFocus required />
-                <select value={category} onChange={e => setCategory(e.target.value as Category)} className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500">
+                <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Item name" className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 sm:col-span-2 bg-white text-gray-900" required />
+                <select value={category} onChange={e => setCategory(e.target.value as Category)} className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 bg-white text-gray-900">
                     {Object.values(Category).map(cat => <option key={cat} value={cat}>{cat}</option>)}
                 </select>
             </div>
@@ -91,7 +93,7 @@ const ShoppingList: React.FC<ShoppingListProps> = ({ items, onMoveToInHouse, onA
           <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value as SortOption)}
-            className="pl-3 pr-8 py-1.5 text-sm border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="pl-3 pr-8 py-1.5 text-sm border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white text-gray-900"
           >
             <option value="default">Default</option>
             <option value="name">Sort by Name</option>
@@ -109,13 +111,13 @@ const ShoppingList: React.FC<ShoppingListProps> = ({ items, onMoveToInHouse, onA
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, item.id)}
             onDragEnd={() => setDraggedItemId(null)}
-            className={`flex items-center justify-between bg-gray-50 p-3 rounded-lg transition-opacity ${sortOption === 'default' ? 'cursor-grab' : 'cursor-default'} ${draggedItemId === item.id ? 'opacity-40' : 'opacity-100'}`}
+            className={`flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between bg-gray-50 p-3 rounded-lg transition-opacity ${sortOption === 'default' ? 'cursor-grab' : 'cursor-default'} ${draggedItemId === item.id ? 'opacity-40' : 'opacity-100'}`}
           >
             <div className="flex items-center gap-2">
               {sortOption === 'default' && <GripVertical className="w-5 h-5 text-gray-400" />}
               <GroceryItemDisplay name={item.name} category={item.category} isOneTime={!item.isStandard} />
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 self-end sm:self-center">
               <button
                 onClick={() => onMoveToInHouse(item)}
                 className="p-1.5 rounded-full bg-green-100 hover:bg-green-200 text-green-700 transition"

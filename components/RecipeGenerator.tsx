@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from 'react';
 import { GroceryItem, Recipe } from '../types';
 import { generateRecipe, RecipeRequest } from '../services/geminiService';
@@ -61,7 +62,7 @@ const RecipeGenerator: React.FC<RecipeGeneratorProps> = ({ inHouseItems, onSaveR
         <select
             value={options[type]}
             onChange={(e) => handleOptionChange(type, e.target.value)}
-            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-white text-gray-900"
         >
             {values.map(v => <option key={v} value={v}>{v}</option>)}
         </select>

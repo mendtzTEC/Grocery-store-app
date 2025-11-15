@@ -5,10 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grocery Genius</title>
+    <meta name="theme-color" content="#f9fafb">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            /* Enforce a light theme to prevent OS-level dark mode from breaking form styles */
+            color-scheme: light;
+        }
+    </style>
     <script>
         tailwind.config = {
             theme: {

@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback, useEffect } from 'react';
 import { X, Loader2, Sparkles, Plus, Home } from 'lucide-react';
 import { generateShoppingListFromRecipe } from '../services/geminiService';
@@ -42,7 +43,8 @@ const ImportRecipeModal: React.FC<ImportRecipeModalProps> = ({ onClose, onAddIte
             
             const processedItems = items.map(item => {
                  const normalized = item.normalizedName.toLowerCase();
-                 const isOwned = Array.from(ownedItemNames).some(ownedItem => ownedItem.includes(normalized));
+                 // Fix: Explicitly type `ownedItem` as `string` to prevent type inference issues.
+                 const isOwned = Array.from(ownedItemNames).some((ownedItem: string) => ownedItem.includes(normalized));
                  return { ...item, checked: !isOwned, owned: isOwned };
             });
 
@@ -99,7 +101,7 @@ const ImportRecipeModal: React.FC<ImportRecipeModalProps> = ({ onClose, onAddIte
                             rows={8}
                             value={recipeText}
                             onChange={(e) => setRecipeText(e.target.value)}
-                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500"
+                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 bg-white text-gray-900"
                             placeholder="e.g., 2 cups flour, 1 tsp baking soda..."
                         />
                     </div>
@@ -113,7 +115,7 @@ const ImportRecipeModal: React.FC<ImportRecipeModalProps> = ({ onClose, onAddIte
                             min="1"
                             value={servings}
                             onChange={(e) => setServings(Math.max(1, parseInt(e.target.value, 10)))}
-                            className="w-32 p-2 border rounded-md focus:ring-2 focus:ring-indigo-500"
+                            className="w-32 p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 bg-white text-gray-900"
                         />
                     </div>
                     

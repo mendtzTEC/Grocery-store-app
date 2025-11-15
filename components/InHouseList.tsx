@@ -1,3 +1,5 @@
+
+
 import React, { useState, useMemo } from 'react';
 import { GroceryItem, Category } from '../types';
 import { Plus, ShoppingCart, GripVertical, ArrowUpDown, Trash2, X } from 'lucide-react';
@@ -36,14 +38,14 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ onAdd, onCancel }) => {
     return (
         <form onSubmit={handleSubmit} className="space-y-3 p-3 bg-gray-50 rounded-lg border">
             <h3 className="font-semibold text-gray-700 text-lg">Add New Item</h3>
-            <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Item name" className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500" autoFocus required />
-            <div className="grid grid-cols-3 gap-2">
-                <input type="number" value={amount} onChange={e => setAmount(e.target.value === '' ? '' : Math.max(0, parseInt(e.target.value, 10)))} placeholder="Qty" className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500" required />
-                <select value={unit} onChange={e => setUnit(e.target.value as 'pcs' | 'g')} className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500">
+            <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Item name" className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 bg-white text-gray-900" required />
+            <div className="grid grid-cols-2 gap-2">
+                <input type="number" value={amount} onChange={e => setAmount(e.target.value === '' ? '' : Math.max(0, parseInt(e.target.value, 10)))} placeholder="Qty" className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 bg-white text-gray-900" required />
+                <select value={unit} onChange={e => setUnit(e.target.value as 'pcs' | 'g')} className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 bg-white text-gray-900">
                     <option value="pcs">pcs</option>
                     <option value="g">g</option>
                 </select>
-                <select value={category} onChange={e => setCategory(e.target.value as Category)} className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 col-span-3 sm:col-span-1">
+                <select value={category} onChange={e => setCategory(e.target.value as Category)} className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 col-span-2 bg-white text-gray-900">
                     {Object.values(Category).map(cat => <option key={cat} value={cat}>{cat}</option>)}
                 </select>
             </div>
@@ -106,7 +108,7 @@ const InHouseList: React.FC<InHouseListProps> = ({ items, onUpdateQuantity, onMo
           <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value as SortOption)}
-            className="pl-3 pr-8 py-1.5 text-sm border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="pl-3 pr-8 py-1.5 text-sm border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white text-gray-900"
           >
             <option value="default">Default</option>
             <option value="name">Sort by Name</option>
@@ -125,24 +127,24 @@ const InHouseList: React.FC<InHouseListProps> = ({ items, onUpdateQuantity, onMo
               onDragOver={handleDragOver}
               onDrop={(e) => handleDrop(e, item.id)}
               onDragEnd={() => setDraggedItemId(null)}
-              className={`flex items-center justify-between bg-gray-50 p-3 rounded-lg transition-opacity ${sortOption === 'default' ? 'cursor-grab' : 'cursor-default'} ${draggedItemId === item.id ? 'opacity-40' : 'opacity-100'}`}
+              className={`flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between bg-gray-50 p-3 rounded-lg transition-opacity ${sortOption === 'default' ? 'cursor-grab' : 'cursor-default'} ${draggedItemId === item.id ? 'opacity-40' : 'opacity-100'}`}
             >
               <div className="flex items-center gap-2">
                 {sortOption === 'default' && <GripVertical className="w-5 h-5 text-gray-400" />}
                 <GroceryItemDisplay name={item.name} category={item.category} />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 self-end sm:self-auto">
                  <input
                     type="number"
                     value={item.quantity?.amount ?? 0}
                     onChange={(e) => onUpdateQuantity(item.id, { amount: parseInt(e.target.value, 10) || 0, unit: item.quantity?.unit ?? 'pcs' })}
-                    className="w-16 p-1.5 text-center font-semibold bg-white border border-gray-200 rounded-md"
+                    className="w-16 p-1.5 text-center font-semibold bg-white border border-gray-200 rounded-md text-gray-900"
                     aria-label={`Quantity of ${item.name}`}
                  />
                  <select
                     value={item.quantity?.unit ?? 'pcs'}
                     onChange={(e) => onUpdateQuantity(item.id, { amount: item.quantity?.amount ?? 0, unit: e.target.value as 'pcs' | 'g' })}
-                    className="p-1.5 text-sm bg-white border border-gray-200 rounded-md"
+                    className="p-1.5 text-sm bg-white border border-gray-200 rounded-md text-gray-900"
                     aria-label={`Unit for ${item.name}`}
                  >
                     <option value="pcs">pcs</option>
